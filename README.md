@@ -13,6 +13,7 @@ This project required:
 
 <img width="640" height="640" alt="image" src="https://github.com/user-attachments/assets/bfabd59c-5d06-4113-9eed-ac0f89f13ce8" />
 <img width="1280" height="725" alt="image" src="https://github.com/user-attachments/assets/7c668b5b-b76f-4629-9de2-6aba0d61120e" />
+![https://github.com/user-attachments/assets/7c668b5b-b76f-4629-9de2-6aba0d61120e]( | width=100)
 
 <img width="904" height="541" alt="image" src="https://github.com/user-attachments/assets/f4abff87-b302-458f-8756-296a5e6fc584" />
 
