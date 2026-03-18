@@ -10,4 +10,10 @@ This project required:
 -Precise control of ~20V via NPN-PNP logic using 3.3V STM32 PIN,
 -Soldering and testing self-made circuits onto soldering boards.
 
+
+<img width="640" height="640" alt="image" src="https://github.com/user-attachments/assets/bfabd59c-5d06-4113-9eed-ac0f89f13ce8" />
+<img width="1280" height="725" alt="image" src="https://github.com/user-attachments/assets/7c668b5b-b76f-4629-9de2-6aba0d61120e" />
+
+<img width="904" height="541" alt="image" src="https://github.com/user-attachments/assets/f4abff87-b302-458f-8756-296a5e6fc584" />
+
 <img width="1049" height="624" alt="image" src="https://github.com/user-attachments/assets/d9a98eb2-094e-41bf-b9da-3cfc1df7ae4d" />
