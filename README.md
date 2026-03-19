@@ -13,11 +13,46 @@ This project required:
 <img width="450" height="725" alt="image" src="https://github.com/user-attachments/assets/7c668b5b-b76f-4629-9de2-6aba0d61120e" /><br/>
 Electronic cicuit with NPN-PNP switch to control 20 V and a voltage regulator to control when the current sensor powers up.
 # STM32 program
-Program is based on a 100μs timer interrupt. With switches, boolean operations, boolean algebra etc.
+Program is based on a 100μs timer interrupt. With switches, boolean operations, boolean algebra etc. Full code can be found at Code/Src/main.c. A small part of code is shown below:
 ```c
+if(htim->Instance == TIM3){ // The main timer interrupt. Runs every 100us.
 
+
+		switch(checkmark){
+			case 0:
+				break;
+			case 1: //Powering up the sensor
+				HAL_GPIO_WritePin(AOUT_GPIO_Port, AOUT_Pin, TIFEN_Matrix[bit_counter]); //setting 0 to Aout.
+				HAL_GPIO_WritePin(POWER_GPIO_Port, POWER_Pin, SET); //Turning on voltage stabilizer TC1014
+				bit_counter ++ ;
+				if(bit_counter >= 5){
+					bit_counter = 0;
+					checkmark = 2;
+				}
+				break;
+			case 2: //Writing enter interface sequence
+				HAL_GPIO_WritePin(TRIGGER_GPIO_Port, TRIGGER_Pin,0); //Triggers step-down signalizes start of a frame. (Useful only for reading with osciloscope)
+				HAL_GPIO_WritePin(AOUT_GPIO_Port, AOUT_Pin, FrameMatrix[(picker & WordABCD) && 1][bit_counter]); //FrameMatrix[x][y] has frame struction. The [x] is logic 0/1. The [y] is the sequence of the frame.
+				bit_counter ++;
+				if(bit_counter >= 6){
+					HAL_GPIO_WritePin(TRIGGER_GPIO_Port, TRIGGER_Pin,1);
+					bit_counter = 0;
+					picker = picker << 1; //the picker goes one bit up, 1 -> 2 -> 4 -> 8 ->... -> 32768. After that the whole word has been sent, and picker resets to picker = 1.
+					if(!picker){ // When picker (uint16_t) reaches value of 65536 it will set itself to '0' since the highest number for uint16_t is 65,535. Therefore the condition !picker.
+						picker = 1;
+						checkmark = 3;
+//						checkmark = 7; // Uncomment this line, and comment out checkmark =3; line to write custom message and read the answer from TLI4971
+					}
+				}
 ```
-# Using program
+# Using the program
+The programs default operation is to read EEPROM contents, store the data in EPROMreg[1] matrix, then the program overwrites EEPROM contents with desired values and saves it with 20V, after which the program asks the current sensor to read back the new EEPROM contents and store it in EPROMreg[2].
+Both EEPROM contents can be read in "live expressions" section of debugger:
+<img width="400" height="628" alt="Zrzut ekranu 2026-02-02 101313" src="https://github.com/user-attachments/assets/f6841fac-e152-44b6-a00f-000292ac45b9" />
+
+The image above shows changed and saved values on adress 0x0 (0xc00c -> 0xc038) and 0x2 (0x4 -> 0x9). The changes on these adrresses changed the range of current sensor and the way in which it represents the current based on table below:
+<img width="500" height="747" alt="image" src="https://github.com/user-attachments/assets/24bb4973-9614-4c1c-b5af-8531ecb0fe50" />
+
 
 <img width="320" height="541" alt="image" src="https://github.com/user-attachments/assets/f4abff87-b302-458f-8756-296a5e6fc584" /><br/>
 
