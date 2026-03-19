@@ -51,11 +51,15 @@ if(htim->Instance == TIM3){ // The main timer interrupt. Runs every 100us.
 				}
 ```
 # Using the program
-The programs default operation is to read EEPROM contents, store the data in EPROMreg[1] matrix, then the program overwrites EEPROM contents with desired values and saves it with 20V, after which the program asks the current sensor to read back the new EEPROM contents and store it in EPROMreg[2].
+The programs default operation is to:
+1. read EEPROM contents,
+2. store the data in EPROMreg[1] matrix,
+3. the program now overwrites EEPROM contents with desired values and saves it with the use of 20V,
+4. after which the program asks the current sensor to read back the new EEPROM contents and store it in EPROMreg[2]. <br/> <br/>
 Both EEPROM contents can be read in "live expressions" section of debugger: <br/>
 <img width="400" height="628" alt="Zrzut ekranu 2026-02-02 101313" src="https://github.com/user-attachments/assets/f6841fac-e152-44b6-a00f-000292ac45b9" />
 
-The image above shows changed and saved values on adress 0x0 (0xc00c -> 0xc038) and 0x2 (0x4 -> 0x9). The changes on these adrresses changed the range of current sensor and the way in which it represents the current based on table below: <br/>
+The image above shows changed and saved values on adress 0x40 (0xc00c -> 0xc038) and 0x42 (0x4 -> 0x9). The changes on these adrresses changed the range of current sensor and the operation mode based on table below: <br/>
 <img width="500" height="747" alt="image" src="https://github.com/user-attachments/assets/24bb4973-9614-4c1c-b5af-8531ecb0fe50" />
 
 
