@@ -53,9 +53,9 @@ if(htim->Instance == TIM3){ // The main timer interrupt. Runs every 100us.
 # Using the program
 The programs default operation is to:
 1. read EEPROM contents,
-2. store the data in EPROMreg[1] matrix,
+2. store the data in EPROMreg[0] array,
 3. the program now overwrites EEPROM contents with desired values and saves it with the use of 20V,
-4. after which the program asks the current sensor to read back the new EEPROM contents and store it in EPROMreg[2]. <br/>
+4. after which the program asks the current sensor to read back the new EEPROM contents and store it in EPROMreg[1]. <br/>
 <br/>
 Both EEPROM contents can be read in "live expressions" section of debugger: <br/>
 <img width="400" height="628" alt="Zrzut ekranu 2026-02-02 101313" src="https://github.com/user-attachments/assets/f6841fac-e152-44b6-a00f-000292ac45b9" />
