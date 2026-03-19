@@ -1,9 +1,14 @@
 # Communication (and programming of EEPROM) with TLI4971
+## Overview - Justification for the project
+There is a certain current sensor on the market - TLI4971, that is both precise and cheap, but the evaluation board sold with the current sensor only changes RAM of the current sensor. Therefore you cannot permanently change settings of the current sensor (range, operation mode, "over current detection threshhold"), and you are stuck with the default settings unless you go through the trouble of changing the settings each time you power up the current sensor. There is a programmer for the current sensor but it's expensive. 
+<br/>I've set the goal for this project to :
+1. communicate with the current sensor (via its own special protocol),
+2. permanently change its EEPROM contents with the use of 20V power supply.
 
-Program for STM32 microcontroller that communicates with a current sensor TLI4971 via its custom communication protocol and to reset its EEPROM to a desired content (with the use of ~20V power supply). TLI4971 has a custom single-wire communication protocol. 
+<!---Program for STM32 microcontroller that communicates with a current sensor TLI4971 via its custom communication protocol and to reset its EEPROM to a desired content (with the use of ~20V power supply). TLI4971 has a custom single-wire communication protocol. 
 
 The Infineons own programmer costs $300, which puts it beyond many people's reach. My solution requires only a microcontroller and a power supply.
-There is an evolution-board for the TLI4971 current sensor for around $20 but it doesn't reset its EEPROM, and the changes to memory revert back to default values after a restart. <br/>
+There is an evolution-board for the TLI4971 current sensor for around $20 but it doesn't reset its EEPROM, and the changes to memory revert back to default values after a restart. <br/> --->
 <img width="320" height="640" alt="image" src="https://github.com/user-attachments/assets/bfabd59c-5d06-4113-9eed-ac0f89f13ce8" /><br/>
 
 This project required:
@@ -13,7 +18,7 @@ This project required:
 <img width="450" height="725" alt="image" src="https://github.com/user-attachments/assets/7c668b5b-b76f-4629-9de2-6aba0d61120e" /><br/>
 Electronic cicuit with NPN-PNP switch to control 20 V and a voltage regulator to control when the current sensor powers up.
 # STM32 program
-Program is based on a 100μs timer interrupt. With switches, boolean operations, boolean algebra etc. Full code can be found at Code/Src/main.c. A small part of code is shown below:
+Program is based on a 100μs timer interrupt. With switches, boolean operations, boolean algebra etc. Full code can be found at "Code/Src/main.c". A small part of code is shown below:
 ```c
 if(htim->Instance == TIM3){ // The main timer interrupt. Runs every 100us.
 
