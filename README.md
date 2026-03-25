@@ -1,6 +1,10 @@
-# Communication (and programming of EEPROM) with TLI4971
+# [Project finished] Communication (and programming of EEPROM) with TLI4971
 ## Overview - Justification for the project
-There is a certain current sensor on the market - TLI4971, that is both precise and cheap, but the evaluation board sold with the current sensor only changes RAM of the current sensor. Therefore you cannot permanently change settings of the current sensor (range, operation mode, "over current detection threshhold"), and you are stuck with the default settings unless you go through the trouble of changing the settings each time you power up the current sensor. There is a programmer for the current sensor but it's expensive. 
+An accurate and cheap current sensor -TLI4971 requiers an expensive programmer to change its settings like: range, operation mode or overcurrent threshold. I aimed to change the EEPROM with only a microcontroller and a power supply (and a few electronic components).
+
+
+
+<!--- There is a certain current sensor on the market - TLI4971, that is both precise and cheap, but the evaluation board sold with the current sensor only changes RAM of the current sensor. Therefore you cannot permanently change settings of the current sensor (range, operation mode, "over current detection threshhold"), and you are stuck with the default settings unless you go through the trouble of changing the settings each time you power up the current sensor. There is a programmer for the current sensor but it's expensive. --->
 <br/>I've set the goal for this project to :
 1. communicate with the current sensor (via its own special protocol),
 2. permanently change its EEPROM contents with the use of 20V power supply.
