@@ -1,6 +1,6 @@
 # [Project finished] Communication (and programming of EEPROM) with TLI4971
 ## Overview - Justification for the project
-A TLI4971 is an accurate and readily-available current sensor. However it lacks the ability to change its settings without buying a very expensive proprietery programmer. With my project I aimed to change that EEPROM with only a microcontroller and a power supply. My solution turn out to be much cheaper than the programmer itself. I have succesfully saved money and learnt new skills.
+A TLI4971 is an accurate and readily-available current sensor. However it lacks the ability to change its settings without buying a very expensive proprietery programmer. With my project I aimed to change that EEPROM with only a microcontroller and a power supply. My solution turned out to be much cheaper than the programmer itself. I have succesfully saved money and learnt new skills.
 
 
 
