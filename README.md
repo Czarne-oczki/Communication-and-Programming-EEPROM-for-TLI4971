@@ -14,7 +14,7 @@ A TLI4971 is an accurate and readily-available current sensor. However it lacks 
 The Infineons own programmer costs $300, which puts it beyond many people's reach. My solution requires only a microcontroller and a power supply.
 There is an evolution-board for the TLI4971 current sensor for around $20 but it doesn't reset its EEPROM, and the changes to memory revert back to default values after a restart. <br/> --->
 <img src="https://github.com/user-attachments/assets/bfabd59c-5d06-4113-9eed-ac0f89f13ce8" alt="image" width="50%" />
-
+<br/>
 This project required:
 1. Creating electronic circuit for communication and controlling 20.5V voltage supply.
 2. Writing a program for STM32 that will simultaneously send and receive data.
@@ -65,7 +65,7 @@ if(htim->Instance == TIM3){ // The main timer interrupt. Runs every 100us.
 }
 ```
 
-
+<br/>
 
 
 # Using the program
@@ -77,7 +77,7 @@ The programs default operation is to:
 <br/>
 Both EEPROM contents can be read in "live expressions" section of debugger: <br/>
 <img src="https://github.com/user-attachments/assets/f6841fac-e152-44b6-a00f-000292ac45b9" alt="image" width="50%" />
-
+<br/>
 The image above shows changed and saved values on adress 0x40 (0xc00c -> 0xc038) and 0x42 (0x4 -> 0x9). The changes on these adrresses changed the range of current sensor and the operation mode based on table below: <br/>
 <img src="https://github.com/user-attachments/assets/24bb4973-9614-4c1c-b5af-8531ecb0fe50" alt="image" width="50%" />
 
