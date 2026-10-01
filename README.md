@@ -13,13 +13,12 @@ A TLI4971 is an accurate and readily-available current sensor. However it lacks 
 
 The Infineons own programmer costs $300, which puts it beyond many people's reach. My solution requires only a microcontroller and a power supply.
 There is an evolution-board for the TLI4971 current sensor for around $20 but it doesn't reset its EEPROM, and the changes to memory revert back to default values after a restart. <br/> --->
-<img src="https://github.com/user-attachments/assets/bfabd59c-5d06-4113-9eed-ac0f89f13ce8" alt="image" width="50%" />
-<br/>
+<img src="https://github.com/user-attachments/assets/bfabd59c-5d06-4113-9eed-ac0f89f13ce8" alt="image" width="50%" /><br/>
 This project required:
 1. Creating electronic circuit for communication and controlling 20.5V voltage supply.
 2. Writing a program for STM32 that will simultaneously send and receive data.
-# Electronic circuit 
-<img src="https://github.com/user-attachments/assets/7c668b5b-b76f-4629-9de2-6aba0d61120e" alt="image" width="50%" />
+# Electronic circuit <br/>
+<img src="https://github.com/user-attachments/assets/7c668b5b-b76f-4629-9de2-6aba0d61120e" alt="image" width="50%" /><br/>
 Electronic cicuit with NPN-PNP switch to control 20 V and a voltage regulator to control when the current sensor powers up.
 # STM32 program
 Program is based on a 100μs timer interrupt. With switches, boolean operations, boolean algebra etc. Full code can be found at "Code/Src/main.c". A small part of code is shown below:
