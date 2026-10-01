@@ -23,36 +23,46 @@ This project required:
 Electronic cicuit with NPN-PNP switch to control 20 V and a voltage regulator to control when the current sensor powers up.
 # STM32 program
 Program is based on a 100μs timer interrupt. With switches, boolean operations, boolean algebra etc. Full code can be found at "Code/Src/main.c". A small part of code is shown below:
+
 ```c
 if(htim->Instance == TIM3){ // The main timer interrupt. Runs every 100us.
+    switch(checkmark){
+        case 0:
+            break;
 
+        case 1: // Powering up the sensor
+            HAL_GPIO_WritePin(AOUT_GPIO_Port, AOUT_Pin, TIFEN_Matrix[bit_counter]);
+            HAL_GPIO_WritePin(POWER_GPIO_Port, POWER_Pin, SET);
+            bit_counter++;
 
-		switch(checkmark){
-			case 0:
-				break;
-			case 1: //Powering up the sensor
-				HAL_GPIO_WritePin(AOUT_GPIO_Port, AOUT_Pin, TIFEN_Matrix[bit_counter]); //setting 0 to Aout.
-				HAL_GPIO_WritePin(POWER_GPIO_Port, POWER_Pin, SET); //Turning on voltage stabilizer TC1014
-				bit_counter ++ ;
-				if(bit_counter >= 5){
-					bit_counter = 0;
-					checkmark = 2;
-				}
-				break;
-			case 2: //Writing enter interface sequence
-				HAL_GPIO_WritePin(TRIGGER_GPIO_Port, TRIGGER_Pin,0); //Triggers step-down signalizes start of a frame. (Useful only for reading with osciloscope)
-				HAL_GPIO_WritePin(AOUT_GPIO_Port, AOUT_Pin, FrameMatrix[(picker & WordABCD) && 1][bit_counter]); //FrameMatrix[x][y] has frame struction. The [x] is logic 0/1. The [y] is the sequence of the frame.
-				bit_counter ++;
-				if(bit_counter >= 6){
-					HAL_GPIO_WritePin(TRIGGER_GPIO_Port, TRIGGER_Pin,1);
-					bit_counter = 0;
-					picker = picker << 1; //the picker goes one bit up, 1 -> 2 -> 4 -> 8 ->... -> 32768. After that the whole word has been sent, and picker resets to picker = 1.
-					if(!picker){ // When picker (uint16_t) reaches value of 65536 it will set itself to '0' since the highest number for uint16_t is 65,535. Therefore the condition !picker.
-						picker = 1;
-						checkmark = 3;
-//						checkmark = 7; // Uncomment this line, and comment out checkmark =3; line to write custom message and read the answer from TLI4971
-					}
-				}
+            if(bit_counter >= 5){
+                bit_counter = 0;
+                checkmark = 2;
+            }
+            break;
+
+        case 2: // Writing enter interface sequence
+            HAL_GPIO_WritePin(TRIGGER_GPIO_Port, TRIGGER_Pin, 0);
+            HAL_GPIO_WritePin(AOUT_GPIO_Port, AOUT_Pin,
+                              FrameMatrix[(picker & WordABCD) && 1][bit_counter]);
+            bit_counter++;
+
+            if(bit_counter >= 6){
+                HAL_GPIO_WritePin(TRIGGER_GPIO_Port, TRIGGER_Pin, 1);
+                bit_counter = 0;
+                picker = picker << 1;
+
+                if(!picker){
+                    picker = 1;
+                    checkmark = 3;
+                    // checkmark = 7;
+                }
+            }
+            break;
+
+        // ...
+    }
+}
 ```
 
 
