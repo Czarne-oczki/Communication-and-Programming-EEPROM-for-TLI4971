@@ -1,8 +1,11 @@
 # [Project finished] Communication (and programming of EEPROM) with TLI4971
-## Overview - Justification for the project
-A TLI4971 is an accurate and readily-available current sensor. However it lacks the ability to change its settings without buying a very expensive proprietery programmer. With my project I aimed to change that EEPROM with only a microcontroller and a power supply. My solution turned out to be much cheaper than the programmer itself. I have succesfully saved money and learnt new skills.
+## Overview
+<!---A TLI4971 is an accurate and readily-available current sensor. However it lacks the ability to change its settings without buying a very expensive proprietery programmer. With my project I aimed to change that EEPROM with only a microcontroller and a power supply. My solution turned out to be much cheaper than the programmer itself. I have succesfully saved money and learnt new skills.--->
 
 
+The TLI4971 is an accurate and affordable current sensor, but it lacks the ability to change its settings without a proprietary and expensive programmer SP004441438 (The settings can be changed via Micro-USB shield but will revert back to default settings on restart.). The changing of the settings is challenging because the current sensor requiers a custom-made communication protocol via its A<sub>out</sub> pin, and requiers a programming voltage V<sub>prog</sub> = 21V to save the settings. My semester project was to change and save the settings without the use of the TLI's programmer. 
+
+For the project I wrote an STM32 program to communicate with the TLI4971 via its own custom protocol, and created an electronic circuit to drive programing voltage V<sub>prog</sub> at specific times so the changes will be implemented into its EEPROM.
 
 <!--- There is a certain current sensor on the market - TLI4971, that is both precise and cheap, but the evaluation board sold with the current sensor only changes RAM of the current sensor. Therefore you cannot permanently change settings of the current sensor (range, operation mode, "over current detection threshhold"), and you are stuck with the default settings unless you go through the trouble of changing the settings each time you power up the current sensor. There is a programmer for the current sensor but it's expensive. --->
 <br/>The goal for this project was to :
